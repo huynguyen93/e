@@ -1,0 +1,19 @@
+*{margin:0; padding:0;}
+.container{padding: 5px 10px;}
+
+.header{overflow: hidden; margin-bottom: 20px;}
+.brand{float:left; margin-right: 40px;}
+.fail{color: red;}
+
+.top-menu{list-style: none; overflow: hidden;}
+.top-menu li{float:left; padding: 10px 0;}
+.top-menu a{padding: 10px;}
+
+.lesson-list a{text-decoration: none; font-size: 18px;}
+
+
+.lesson{border-collapse: collapse; margin-top: 20px;}
+.lesson td{vertical-align: top;}
+.answer, .result{font-family:monospace; font-size: 14px;}
+.answer{width: 800px;}
+.result{padding-left: 2px;}
