@@ -1,4 +1,4 @@
 <?php
-class Lessons extends MY_Model{
+class Lesson_model extends MY_Model{
     public $table = 'lessons';
 }

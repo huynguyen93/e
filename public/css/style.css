@@ -1,19 +1,31 @@
 *{margin:0; padding:0;}
+.fail{color: red;}
+.form-input{display: block; margin: 10px 0; }
+
 .container{padding: 5px 10px;}
+
 
 .header{overflow: hidden; margin-bottom: 20px;}
 .brand{float:left; margin-right: 40px;}
-.fail{color: red;}
-
-.top-menu{list-style: none; overflow: hidden;}
+.top-menu{list-style: none;float: left; overflow: hidden; min-width: 250px;}
 .top-menu li{float:left; padding: 10px 0;}
 .top-menu a{padding: 10px;}
 
+.article{margin-top: 15px;}
 .lesson-list a{text-decoration: none; font-size: 18px;}
 
 
-.lesson{border-collapse: collapse; margin-top: 20px;}
+.lesson{border-collapse: collapse; margin: 20px 0;}
 .lesson td{vertical-align: top;}
 .answer, .result{font-family:monospace; font-size: 14px;}
 .answer{width: 800px;}
 .result{padding-left: 2px;}
+.btn-listen, .btn-check{margin: 0 5px;}
+
+.comment-section{width: 800px;  overflow: auto;}
+.comments {max-height: 550px;overflow: auto; margin-bottom: 10px;}
+.comments > li{margin-bottom: 15px; border-top: 1px dotted #ccc; padding-top: 5px;}
+.comment_reply{margin-left: 25px; margin-top: 10px;list-style: none;}
+.comment_reply > li{margin-top: 10px; border-top: 1px dotted #ccc; padding-top:10px;}
+
+.footer{height: 200px;}

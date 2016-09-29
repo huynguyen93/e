@@ -30,7 +30,7 @@ class MY_Model extends CI_Model{
     }
     
     function create($data){
-        if($this->db->insert($this->table, $data)) return true;
+        if($this->db->insert($this->table, $data)) return $this->db->insert_id();
         else return false;
     }
     
