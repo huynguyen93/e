@@ -11,7 +11,6 @@
         <th>ID</th>
         <?php if(!isset($_GET['cat_id']) || $_GET['cat_id'] < 1) echo '<th>Category</th>' ?>
         <th>Name</th>
-        <th>Slug</th>
         <th>Order</th>
         <th>Status</th>
     </thead>
@@ -22,12 +21,11 @@
             <?php 
             if(!isset($_GET['cat_id']) || $_GET['cat_id'] < 1){
                 $cond['id'] = $lesson->cat_id;
-                $cat = $this->categories->get_detail($cond['id']);
+                $cat = $this->category_model->get_detail($cond['id']);
                 echo '<td>'.$cat->name.'</td>';
             }
             ?>
             <td><?php echo $lesson->name;?></td>
-            <td><?php echo $lesson->slug;?></td>
             <td><?php echo $lesson->num;?></td>
             <td><?php if($lesson->status == 1) echo "active"; else echo "hidden";?></td>
         </tr>

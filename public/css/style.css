@@ -1,31 +1,41 @@
-*{margin:0; padding:0;}
-.fail{color: red;}
-.form-input{display: block; margin: 10px 0; }
+.navbar-brand {
+    color: #345 !important;
+    font-size: 21px;
+    line-height:12px;
+    padding-top:13px;
+    padding-bottom:5px;
+    padding-right: 30px;
+}
 
-.container{padding: 5px 10px;}
+.navbar-brand small {
+    color: #aaa;
+    margin-top: 5px;
+font-weight: normal;
+  display:block;
+  font-size:12px;
+}
+.breadcrumb{overflow: hidden;}
+/*.pagination-links{float: right;}*/
+@media(max-width: 425px){
+    .nav-link{float: left;}
+    .navbar-brand small{display: none;}
+}
 
+.result, .user-answer{font-size: 14px; }
+.answer{visibility: hidden; height:0; padding:0 10px; margin:0;}
+.result{padding: 0 10px; margin-bottom: 0;}
+.translation{padding: 0 10px; margin-bottom: 0;}
+.wrong{color: red;}
 
-.header{overflow: hidden; margin-bottom: 20px;}
-.brand{float:left; margin-right: 40px;}
-.top-menu{list-style: none;float: left; overflow: hidden; min-width: 250px;}
-.top-menu li{float:left; padding: 10px 0;}
-.top-menu a{padding: 10px;}
+table, td{ vertical-align: top; padding: 0px 3px 10px 3px;}
+table{margin-bottom: 25px;}
 
-.article{margin-top: 15px;}
-.lesson-list a{text-decoration: none; font-size: 18px;}
+.user-info{padding: 15px 0; margin: 0;}
 
+.stats-table{width: 100%;}
+.stats-table th{padding-bottom: 15px; padding-left: 5px; text-align: center;}
+.stats-table td{text-align: right;}
+.stats-table .date{width: 100px;}
+.stats-table .word-count{width: 65px;}
+.column{background: #337ab7; color: white; border-radius: 0 5px 5px 0; padding: 10px; margin: 5px 0;}
 
-.lesson{border-collapse: collapse; margin: 20px 0;}
-.lesson td{vertical-align: top;}
-.answer, .result{font-family:monospace; font-size: 14px;}
-.answer{width: 800px;}
-.result{padding-left: 2px;}
-.btn-listen, .btn-check{margin: 0 5px;}
-
-.comment-section{width: 800px;  overflow: auto;}
-.comments {max-height: 550px;overflow: auto; margin-bottom: 10px;}
-.comments > li{margin-bottom: 15px; border-top: 1px dotted #ccc; padding-top: 5px;}
-.comment_reply{margin-left: 25px; margin-top: 10px;list-style: none;}
-.comment_reply > li{margin-top: 10px; border-top: 1px dotted #ccc; padding-top:10px;}
-
-.footer{height: 200px;}
