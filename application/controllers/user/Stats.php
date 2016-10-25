@@ -59,7 +59,7 @@ class Stats extends MY_Controller{
         }
         
         //update user's stats
-        $today_timestamp = strtotime(date('Y-m-d', time()). ' 00:00:00');
+        $today_timestamp = strtotime(date('Y-m-d', time()));
         if(isset($user_stats[$today_timestamp])) $user_stats[$today_timestamp] += $total_words;
         else {
             $user_stats = array_reverse($user_stats, true);

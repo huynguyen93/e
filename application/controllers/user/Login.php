@@ -2,6 +2,27 @@
 class Login extends MY_Controller{
     
     public function index(){
+//        $name = $this->uri->rsegment(3);
+//        $recent_word_count = rand(300,3000);
+//        $stats = '{';
+//        for($i = 1; $i <= 90; $i++){
+//            if($i == 1) $stats .= '"1477155600":'.$recent_word_count.',';
+//            elseif($i < 90) $stats .= '"'.(1477155600 - $i*60*60*24).'":'.rand(300, 3000).',';
+//            else $stats .= '"'.(1477155600 - $i*60*60*24).'":'.rand(300, 3000);
+//        }
+//        $stats .= '}';
+//        $data = array(
+//            'username' => $name,
+//            'stats' => $stats,
+//            'email' => $name."@gmail.com",
+//            'password' => 'test',
+//            'salt' => '123',
+//            'created_at' => time(),
+//            'updated_at' => time(),
+//            'recent_word_count' => $recent_word_count
+//        );
+//        $this->db->insert('users', $data);
+        
         $this->data['view'] = 'user/login';
         $this->load->view('layout', $this->data);
     }
@@ -48,6 +69,13 @@ class Login extends MY_Controller{
             );
             
             $this->session->set_userdata($user_data);
+            
+            if($this->input->post('remember'))
+            {
+                $this->load->helper('cookie');
+                $cookie = $this->input->cookie('ci_session'); // we get the cookie
+                $this->input->set_cookie('ci_session', $cookie, '604800'); // and add one year to it's expiration
+            }
             
             unset($_SESSION['flash']);
             redirect($this->back);

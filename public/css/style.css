@@ -39,3 +39,7 @@ table{margin-bottom: 25px;}
 .stats-table .word-count{width: 65px;}
 .column{background: #337ab7; color: white; border-radius: 0 5px 5px 0; padding: 10px; margin: 5px 0;}
 
+.faqs h3{margin-top: 40px;}
+.faqs h4{margin-top: 0px; margin-bottom: 5px;}
+.faqs p{margin-bottom: 5px;}
+.faqs ol > li{margin-bottom: 25px;}

@@ -84,10 +84,15 @@ this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL va
 this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 };
 */
+    var disqus_config = function () {
+        this.page.url = '<?php echo current_url(); ?>'
+        this.page.identifier = '<?php echo $this->uri->rsegment('3').'/'.$this->uri->rsegment(4); ?>';
+    };
 (function() { // DON'T EDIT BELOW THIS LINE
 var d = document, s = d.createElement('script');
 s.src = '//freedictations.disqus.com/embed.js';
 s.setAttribute('data-timestamp', +new Date());
+    
 (d.head || d.body).appendChild(s);
 })();
 </script>

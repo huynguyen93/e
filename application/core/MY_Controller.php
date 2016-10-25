@@ -1,14 +1,11 @@
 <?php
 class MY_Controller extends CI_Controller{
     var $data = array();
-    var $back;
     
     function __construct(){
         parent::__construct();
-        if(isset($_SESSION['back'])) $this->back = $_SESSION['back'];
-        else $this->back = base_url();
         
-        $who = strtolower($this->uri->segment(1)); if($who != 'admin' && $who != 'user') return;
+        $who = strtolower($this->uri->segment(1)); if($who != 'admin123' && $who != 'user') return;
         $controller = strtolower($this->uri->rsegment(1)); if($controller == 'logout') return;
         $action = strtolower($this->uri->rsegment(2));
         
@@ -27,8 +24,12 @@ class MY_Controller extends CI_Controller{
             $this->load->library('form_validation');
         }
         
-        if($who = 'admin'){
-            
+        if($who = 'admin123'){
+            if(!$this->session->has_userdata('admin') && $controller != 'login') redirect('admin123/login');
+            if($this->session->has_userdata('admin') && $controller == 'login') redirect('admin123/dashboard');
+            $this->load->model('admin_model');
+            $this->load->helper('form');
+            $this->load->library('form_validation');
         }
     }
     

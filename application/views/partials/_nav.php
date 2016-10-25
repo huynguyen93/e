@@ -28,7 +28,7 @@
                 <li><a href="<?php echo base_url('user/register');?>">Đăng kí</a></li>
             <?php } else {?>
                 <li>
-                    <p class="user-info">Chào <b><?php echo $_SESSION['user_nickname'];?></b>, hôm nay bạn đã gõ <b><?php echo ($_SESSION['user_updated_at'] > strtotime(date('Y-m-d', time()).' 00:00:00')) ? $_SESSION['user_recent_word_count'] : 0;  ?></b> chữ!</p>
+                    <p class="user-info">Chào <b><?php echo $_SESSION['user_nickname'];?></b>, hôm nay bạn đã gõ <b><?php echo ($_SESSION['user_updated_at'] > strtotime(date('Y-m-d', time()))) ? $_SESSION['user_recent_word_count'] : 0;  ?></b> chữ!</p>
                 </li>
                 <li>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tài khoản<span class="caret"></span></a>
