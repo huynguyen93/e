@@ -22,7 +22,6 @@ class Lessons extends MY_Controller{
         $this->load->helper('form');
         $lesson_num = $this->uri->rsegment(4);
         $cat_slug = $this->uri->rsegment(3);
-        
         //get category info
         $category = $this->category_model->get_single('slug', $cat_slug);
         
@@ -33,7 +32,6 @@ class Lessons extends MY_Controller{
             $this->session->set_flashdata('fail', 'The lesson is not available right now, please choose another lesson!');
             redirect(base_url('lessons'));
         }
-        
         $_SESSION['back'] = current_url();
         $this->data['category'] = $category;
         $this->data['lesson'] = $lesson;

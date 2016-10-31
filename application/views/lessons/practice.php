@@ -1,18 +1,19 @@
 <div class="row">
     <div class="col-md-12">
-    <ol class="breadcrumb">
-        <li><a href="<?php echo base_url(); ?>"><?php echo $category->name; ?></a></li>
-        <li class="active"><b>Bài <?php echo $lesson->num." - ".$lesson->name; ?></b></li>
-        <li>
-        <?php if($lesson->num > 1) { ?>
-        <a href="<?php echo base_url($category->slug."/".($lesson->num-1));?>" class="nav-link" style="margin-right: 10px;"><span aria-hidden="true">&laquo;</span> Bài trước</a>
-        <?php } ?>
-        <?php if($lesson->num < $category->total_lessons) { ?>
-        <a href="<?php echo base_url($category->slug."/".($lesson->num+1));?>" class="nav-link">Bài tiếp theo <span aria-hidden="true">&raquo;</span></a>
-        <?php }?>
-        </li>
-    </ol>
-<!--    <p class="alert alert-warning">**Phím tắt: Ctrl = Listen. Enter = Check. Tab hoặc &darr;  = Xuống dòng. &uarr; = Lên dòng.</p>-->
+        <ol class="breadcrumb">
+                <li><a href="<?php echo base_url(); ?>"><?php echo $category->name; ?></a></li>
+                <li class="active"><b>Bài <?php echo $lesson->num." - ".$lesson->name; ?></b></li>
+                <div class="next-prev">
+                    <?php if($lesson->num > 1) { ?>
+                    <a href="<?php echo base_url($category->slug."/".($lesson->num-1));?>" class="nav-link" style="margin-right: 10px;"><span aria-hidden="true">&laquo;</span> Bài trước</a>
+                    <?php } ?>
+                    <?php if($lesson->num < $category->total_lessons) { ?>
+                    <a href="<?php echo base_url($category->slug."/".($lesson->num+1));?>" class="nav-link">Bài tiếp theo <span aria-hidden="true">&raquo;</span></a>
+                    <?php }?>
+                </div>
+                <div id="quote"></div>
+            </ol>
+    <p class="text-warning">**Phím tắt: Ctrl+Space = Listen. Enter = Check. Tab hoặc &darr;  = Xuống dòng. &uarr; = Lên dòng.</p>
     <?php echo form_open('user/stats/update', array('id' => 'lesson_form', 'autocomplete'=>"off", 'onkeydown'=>'prevent_submit_form(event);'));?>
         <input type="hidden" style="display:none" name="lesson_id" value="<?php echo $lesson->id; ?>">
         <input type="hidden" style="display:none" name="start_time" value="<?php echo time(); ?>">
@@ -48,7 +49,7 @@
         if(isset($_SESSION['user_id'])){
         ?>
         <tr>
-            <td colspan="4"><input type="submit" name="save_progress_btn" class="btn btn-lg btn-block btn-success" value="Lưu thành tích"></td>
+            <td colspan="4"><input type="submit" name="save_progress_btn" id="save_progress_btn" class="btn btn-lg btn-block btn-success" value="Lưu thành tích"></td>
         </tr>
         <?php
         }
@@ -154,8 +155,8 @@ s.setAttribute('data-timestamp', +new Date());
         var answer = document.getElementById("answer"+num);
         
         result = answer.innerHTML.split(" ");
-        input = document.activeElement.value.trim().toLowerCase().replace(/  /g, ' ').replace(/[^\w\s]*/gi, '').split(" ");
-        answer = answer.innerHTML.trim().toLowerCase().replace(/  /g, ' ').replace(/[^\w\s]*/gi, '').split(" ");
+        input = document.activeElement.value.trim().toLowerCase().replace(/-/g, ' ').replace(/[^\w\s]*/gi, '').replace(/  /g, ' ').split(" ");
+        answer = answer.innerHTML.trim().toLowerCase().replace(/-/g, ' ').replace(/[^\w\s]*/gi, '').replace(/  /g, ' ').split(" ");
         
         var mistaken = false;
         for(i=0; i<answer.length; i++){
@@ -182,6 +183,7 @@ s.setAttribute('data-timestamp', +new Date());
                 check_btn.parentElement.removeChild(check_btn);
             }
             result.style.display = 'none';
+            document.activeElement.value = result.innerHTML;
         }
         document.getElementById('translation'+num).style.display = 'block';
     }

@@ -18,7 +18,7 @@
                 <li class="<?php if($this->uri->rsegment(1) == 'lessons') echo 'active';?>"><a href="<?php echo base_url('lessons');?>">Học</a></li>
                 <li class="<?php if($this->uri->rsegment(1) == 'faq') echo 'active';?>"><a href="<?php echo base_url('faq'); ?>">Hướng dẫn</a></li>
                 <li class="<?php if($this->uri->rsegment(1) == 'top') echo 'active';?>"><a href="<?php echo base_url('top'); ?>">Xếp hạng</a></li>
-                <li class="<?php if($this->uri->rsegment(1) == 'blog') echo 'active';?>"><a href="#">Blog</a></li>
+                <li class="<?php if($this->uri->rsegment(1) == 'blog') echo 'active';?>"><a href="<?php echo base_url('blog'); ?>">Blog</a></li>
                 <li class="<?php if($this->uri->rsegment(1) == 'contact') echo 'active';?>"><a href="<?php echo base_url('contact'); ?>">Liên hệ</a></li>
             </ul>
 
@@ -27,10 +27,10 @@
                 <li><a href="<?php echo base_url('user/login');?>">Đăng nhập</a></li>
                 <li><a href="<?php echo base_url('user/register');?>">Đăng kí</a></li>
             <?php } else {?>
-                <li>
+                <li class="">
                     <p class="user-info">Chào <b><?php echo $_SESSION['user_nickname'];?></b>, hôm nay bạn đã gõ <b><?php echo ($_SESSION['user_updated_at'] > strtotime(date('Y-m-d', time()))) ? $_SESSION['user_recent_word_count'] : 0;  ?></b> chữ!</p>
                 </li>
-                <li>
+                <li class="<?php if($this->uri->segment(1) == 'user') echo 'active';?>">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tài khoản<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo base_url('user/stats');?>">Thống kê</a></li>

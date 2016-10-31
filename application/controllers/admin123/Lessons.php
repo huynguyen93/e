@@ -38,11 +38,12 @@ class Lessons extends MY_Controller{
             $filtered_answers = json_encode($filtered_answers);
             $data = array(
                 'cat_id' => $_POST['cat_id'],
-                'name' => $this->db->escape_str($_POST['name']),
+                'name' => trim($_POST['name']),
                 'answers' => $filtered_answers,
                 'num' => $_POST['num']
             );
             $this->lesson_model->create($data);
+            echo $_POST['num'];
         }
         
         $this->data['view'] = 'admin/lesson/create';

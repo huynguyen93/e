@@ -4,6 +4,7 @@ class MY_Controller extends CI_Controller{
     
     function __construct(){
         parent::__construct();
+        $this->benchmark->mark('code_start');
         
         $who = strtolower($this->uri->segment(1)); if($who != 'admin123' && $who != 'user') return;
         $controller = strtolower($this->uri->rsegment(1)); if($controller == 'logout') return;
@@ -24,7 +25,7 @@ class MY_Controller extends CI_Controller{
             $this->load->library('form_validation');
         }
         
-        if($who = 'admin123'){
+        if($who == 'admin123'){
             if(!$this->session->has_userdata('admin') && $controller != 'login') redirect('admin123/login');
             if($this->session->has_userdata('admin') && $controller == 'login') redirect('admin123/dashboard');
             $this->load->model('admin_model');
@@ -37,5 +38,11 @@ class MY_Controller extends CI_Controller{
         if($this->session->has_userdata('user_id')) return true;
         
         return false;
+    }
+    
+    function __destruct(){
+        $this->benchmark->mark('code_end');
+
+        echo $this->benchmark->elapsed_time('code_start', 'code_end');
     }
 }

@@ -16,10 +16,21 @@ font-weight: normal;
 }
 .breadcrumb{overflow: hidden;}
 /*.pagination-links{float: right;}*/
+.next-prev{display: inline-block; margin-left: 20px;}
+#quote{display:inline-block; float: right;}
 @media(max-width: 425px){
     .nav-link{float: left;}
     .navbar-brand small{display: none;}
 }
+@media(max-width: 769px){
+    
+    .next-prev{display: block; margin: 10px 0; overflow: hidden;}
+     #quote{display: block;  margin-top: 10px; float: left;}
+}
+.h1-margin{margin-top: 20px; margin-bottom: 10px;}
+.panel ul{list-style: none; padding-left: 10px;}
+
+
 
 .result, .user-answer{font-size: 14px; }
 .answer{visibility: hidden; height:0; padding:0 10px; margin:0;}

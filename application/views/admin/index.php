@@ -23,16 +23,21 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="<?php echo admin_url(); ?>">Dashboard</a>
                     </div>
                     <ul class="nav navbar-nav">
+                        <li><a href="<?php echo admin_url('dashboard'); ?>">Dashboard</a></li>
                         <li><a href="<?php echo admin_url('categories'); ?>">Categories</a></li>
+                        <li><a href="<?php echo admin_url('lessons'); ?>">Lessons</a></li>
+                        <li><a href="<?php echo admin_url('blog'); ?>">Blog</a></li>
+                        <li><a href="<?php echo admin_url('logout'); ?>">Logout</a></li>
                     </ul>
                 </div>
             </nav>
-
+            
+            <div class="container">
             <?php $this->load->view('partials/_message');?>
             <?php $this->load->view($view);?>
+            </div>
         </div>
     </body>
 </html>
