@@ -13,7 +13,7 @@
                 </div>
                 <div id="quote"></div>
             </ol>
-    <p class="text-warning">**Phím tắt: Ctrl+Space = Listen. Enter = Check. Tab hoặc &darr;  = Xuống dòng. &uarr; = Lên dòng.</p>
+    <p class="text-warning">**Phím tắt: Ctrl+Space = Nghe. Enter = Hiện đáp án. Ctrl+Enter = Ẩn đáp án. Tab hoặc &darr;  = Xuống dòng. &uarr; = Lên dòng.</p>
     <?php echo form_open('user/stats/update', array('id' => 'lesson_form', 'autocomplete'=>"off", 'onkeydown'=>'prevent_submit_form(event);'));?>
         <input type="hidden" style="display:none" name="lesson_id" value="<?php echo $lesson->id; ?>">
         <input type="hidden" style="display:none" name="start_time" value="<?php echo time(); ?>">
@@ -34,7 +34,7 @@
                 </audio>
             </td>
             <td>
-                <input name="answer[]" class="user-answer form-control input-sm" tabindex="<?php echo $stt;?>" onkeydown="doAction(event, <?php echo $stt;?>);">
+                <input name="answer[]" id="input<?php echo $stt;?>" class="user-answer form-control input-sm" tabindex="<?php echo $stt;?>" onkeydown="doAction(event, <?php echo $stt;?>);">
                 <?php $answer = explode("|", $answer); ?>
                 <p class="result" id="result<?php echo $stt;?>"></p>
                 <p class="answer" id="answer<?php echo $stt;?>"><?php echo $answer[0];?></p>
@@ -46,14 +46,10 @@
         </tr>
         <?php
         }
-        if(isset($_SESSION['user_id'])){
         ?>
         <tr>
             <td colspan="4"><input type="submit" name="save_progress_btn" id="save_progress_btn" class="btn btn-lg btn-block btn-success" value="Lưu thành tích"></td>
         </tr>
-        <?php
-        }
-        ?>
     </table>
     </form>
     <ol class="breadcrumb">
@@ -63,9 +59,14 @@
         <?php if($lesson->num > 1) { ?>
         <a href="<?php echo base_url($category->slug."/".($lesson->num-1));?>" class="nav-link" style="margin-right: 10px;"><span aria-hidden="true">&laquo;</span> Bài trước</a>
         <?php } ?>
-        <?php if($lesson->num < $category->total_lessons) { ?>
+        <?php 
+        if($lesson->num < $category->total_lessons)
+        {
+        ?>
         <a href="<?php echo base_url($category->slug."/".($lesson->num+1));?>" class="nav-link">Bài tiếp theo <span aria-hidden="true">&raquo;</span></a>
-        <?php }?>
+        <?php 
+        }
+        ?>
         </li>
     </ol>
 
@@ -118,7 +119,10 @@ s.setAttribute('data-timestamp', +new Date());
         //keyCode: 13 => enter, 32 => Ctrl+Space, 38 => up arrow, 40 => down arrow. 
         if(event.ctrlKey && event.keyCode == 32) play(num);
         
-        else if(event.keyCode == 13) check(num);    
+        else if(event.ctrlKey && event.keyCode == 13)
+            document.getElementById('result'+num).style.display = 'none';
+            
+        else if(event.keyCode == 13) check(num);
         
         else if(event.keyCode== 40 || event.keyCode==38) {
             var inputs = document.querySelectorAll('[tabindex]');
@@ -138,39 +142,46 @@ s.setAttribute('data-timestamp', +new Date());
     }
     
     function play(num){
-        var audio = document.getElementById("audio"+num);
-        audio.paused ? audio.play() : audio.pause();
-        audio.currentTime = 0;
+        var audios = document.getElementsByTagName('audio');
+        var length = audios.length;
+        var current_audio = document.getElementById("audio"+num);
+        
+        for(var i = 0; i < length; i++){
+            if(audios[i] == current_audio) continue;
+            else audios[i].pause();
+        }
+        
+        current_audio.paused ? current_audio.play() : current_audio.pause();
+        current_audio.currentTime = 0;
         
         var listen_count = parseInt(document.getElementById('listen_count').value);
         document.getElementById('listen_count').value = listen_count+1;
-        
-        if(num == 1) return false;
-        previous = num-1;
-        var previous_audio = document.getElementById("audio"+previous);
-        if (previous_audio.paused==false) previous_audio.pause();
     }
     
     function check(num){
+        var current_input = document.getElementById('input'+num);
         var answer = document.getElementById("answer"+num);
         
-        result = answer.innerHTML.split(" ");
-        input = document.activeElement.value.trim().toLowerCase().replace(/-/g, ' ').replace(/[^\w\s]*/gi, '').replace(/  /g, ' ').split(" ");
-        answer = answer.innerHTML.trim().toLowerCase().replace(/-/g, ' ').replace(/[^\w\s]*/gi, '').replace(/  /g, ' ').split(" ");
+        result = answer.innerHTML.split(' ');
+        input = current_input.value.trim().toLowerCase().replace(/[^\w\s-]*/g, '').replace(/  /g, ' ').split(" ");
+        answer = answer.innerHTML.trim().toLowerCase().replace(/[^\w\s-]*/g, '').replace(/  /g, ' ').split(" ");
         
         var mistaken = false;
-        for(i=0; i<answer.length; i++){
+        for(i=0; i<result.length; i++){
+            
             if(answer[i] != input[i]){
                 result[i] = "<span class='wrong'>"+result[i]+"</span>";
                 mistaken = true;
             }
         }
+        
         if(input.length > answer.length) {
             result[result.length - 1] = "<span class='wrong'>"+result[result.length - 1]+"</span>";
             mistaken = true;
         }
         
         result = result.join(" ");
+        
         document.getElementById("result"+num).innerHTML = result;
         result = document.getElementById("result"+num);
         
@@ -183,7 +194,7 @@ s.setAttribute('data-timestamp', +new Date());
                 check_btn.parentElement.removeChild(check_btn);
             }
             result.style.display = 'none';
-            document.activeElement.value = result.innerHTML;
+            current_input.value = result.innerHTML;
         }
         document.getElementById('translation'+num).style.display = 'block';
     }

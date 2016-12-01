@@ -9,6 +9,14 @@ class Stats extends MY_Controller{
     }
     
     public function update(){
+        // when user want to update their status but forgot to login before doing the lesson:
+        if(isset($_SESSION['post_data'])){
+            foreach($_SESSION['post_data'] as $key => $val){
+                $_POST[$key] = $val;
+            }
+            unset($_SESSION['post_data']);
+        }
+        
         //validation:
         if(!$this->input->post('save_progress_btn') || !$this->input->post('start_time') || !is_numeric($this->input->post('lesson_id')))
            redirect('user/stats');
@@ -31,8 +39,8 @@ class Stats extends MY_Controller{
             $lesson_answers_length = count(explode(" ", $lesson_answers[$i]));
             $user_answers_length = count(explode(" ", $user_answers[$i]));
             
-            //if user's answer is shorter or longer than lesson answer 3 words, don't count that answer
-            if($lesson_answers_length - $user_answers_length >= 3 || $user_answers_length - $lesson_answers_length >= 3) continue;
+            //if user's answer is shorter or longer than lesson answer, don't count that answer
+            if($lesson_answers_length != $user_answers_length) continue;
             
             $total_words += $lesson_answers_length;
             $answer_count ++;
@@ -76,6 +84,7 @@ class Stats extends MY_Controller{
             $user = $this->user_model->get_single('id', $_SESSION['user_id']);
             $this->session->set_userdata('user_updated_at', $user->updated_at);
             $this->session->set_userdata('user_recent_word_count', $user->recent_word_count);
+            redirect($_SESSION['next_lesson']);
         }
         else $this->session->set_flashdata('fail', 'Có lỗi xảy ra, bạn làm lại nhé!');
         

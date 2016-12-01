@@ -23,7 +23,6 @@ font-weight: normal;
     .navbar-brand small{display: none;}
 }
 @media(max-width: 769px){
-    
     .next-prev{display: block; margin: 10px 0; overflow: hidden;}
      #quote{display: block;  margin-top: 10px; float: left;}
 }
@@ -41,7 +40,7 @@ font-weight: normal;
 table, td{ vertical-align: top; padding: 0px 3px 10px 3px;}
 table{margin-bottom: 25px;}
 
-.user-info{padding: 15px 0; margin: 0;}
+.user-info{padding: 15px 0; margin: 0 15px;}
 
 .stats-table{width: 100%;}
 .stats-table th{padding-bottom: 15px; padding-left: 5px; text-align: center;}

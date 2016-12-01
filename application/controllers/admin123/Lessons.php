@@ -43,10 +43,17 @@ class Lessons extends MY_Controller{
                 'num' => $_POST['num']
             );
             $this->lesson_model->create($data);
-            echo $_POST['num'];
+            $this->data['num'] = $_POST['num'] + 1;
         }
         
         $this->data['view'] = 'admin/lesson/create';
         $this->load->view("admin/index", $this->data);
+    }
+    
+    function replace_words(){
+        $words = array(
+            'honour',
+            'labour',
+        );
     }
 }

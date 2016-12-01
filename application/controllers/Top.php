@@ -15,14 +15,13 @@ class Top extends MY_Controller{
         $top_users_today = $this->user_model->get_list($cond);
         
         
-        
         $this_week_timestamp = strtotime('this week') - (time() - $today_timestamp);
         $cond = array(
             'select' => 'username, stats',
             'where' => 'updated_at >'. $this_week_timestamp
         );
         $all_users_this_week = $this->user_model->get_list($cond);
-        $top_users_this_week = $this->sort_users_by_words($all_users_this_week, 7);
+        $top_users_this_week = $this->sort_users_by_words($all_users_this_week, 7, $this_week_timestamp);
             
         $this_month_timestamp = strtotime(date('Y-m', time()));
         $cond = array(
@@ -30,7 +29,7 @@ class Top extends MY_Controller{
             'where' => 'updated_at >'. $this_month_timestamp
         );
         $all_users_this_month = $this->user_model->get_list($cond);
-        $top_users_this_month = $this->sort_users_by_words($all_users_this_month, 30);
+        $top_users_this_month = $this->sort_users_by_words($all_users_this_month, 30, $this_month_timestamp);
         
         $this->data['top_users_today'] = $top_users_today;
         $this->data['top_users_this_week'] = $top_users_this_week;
@@ -39,7 +38,7 @@ class Top extends MY_Controller{
         $this->load->view('layout', $this->data);
     }
     
-    private function sort_users_by_words($user_list, $days){
+    private function sort_users_by_words($user_list, $days, $timestamp){
         $result = array();
         foreach($user_list as $user){
             $total_words = 0;
@@ -48,6 +47,7 @@ class Top extends MY_Controller{
             for($i=1; $i<=$days; $i++)
             {
                 if(!key($records)) continue;
+                if(key($records) < $timestamp) continue;
                 $total_words += current($records);
                 next($records);
             }

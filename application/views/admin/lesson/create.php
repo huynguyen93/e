@@ -14,7 +14,7 @@
             </div>
         
             <div class="col-md-3 form-group">
-                <input type="text" name="num" placeholder="order" id="lesson_num" class="form-control">
+                <input type="text" name="num" placeholder="order" id="lesson_num" value="<?php echo isset($num) ? $num : ''; ?>" class="form-control">
             </div>
         <div class="row" style="clear:both; ">
             <div class="col-md-1" id="result" style="white-space: nowrap; text-align: right; margin-top: 5px; padding-right:0;">
@@ -27,6 +27,7 @@
         
             <div class="col-md-12 form-group">
                 <button onclick="check_lines(); return false;">Check</button>
+                <button type="button" onclick="sort_lines(); return false;">Sort</button>
                 <input type="submit" name="submit" onclick="return confirm('OK?');">
             </div>
         </form>
@@ -57,9 +58,17 @@
     
     function play(event, num){
         event.preventDefault();
-        var audio = document.getElementById("audio"+num);
-        audio.paused ? audio.play() : audio.pause();
-        audio.currentTime = 0;
+        var audios = document.getElementsByTagName('audio');
+        var length = audios.length;
+        var current_audio = document.getElementById("audio"+num);
+        
+        for(var i = 0; i < length; i++){
+            if(audios[i] == current_audio) continue;
+            else audios[i].pause();
+        }
+        
+        current_audio.paused ? current_audio.play() : current_audio.pause();
+        current_audio.currentTime = 0;
     }
     
     function update_line(){
@@ -73,5 +82,16 @@
     
     function toSlug(name){
         return name.toLowerCase().replace(/[^a-z0-9-]/g, ' ').replace(/  /g, '-').replace(/\s+/g, '-');
+    }
+    
+    function sort_lines(){
+        var lines = document.getElementById('answers').value;
+        lines = lines.replace('/\n/', '.').replace(/\,"/g, '",').replace(/\."/g, '".').replace(/\n/g, '');
+        lines = lines.split('.');
+        for(i=0; i<lines.length; i++){
+            lines[i] = lines[i].trim();
+        }
+        lines = lines.join('.').replace(/\./g, '.\n');
+        document.getElementById('answers').value = lines;
     }
 </script>

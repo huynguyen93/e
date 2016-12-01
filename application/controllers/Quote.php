@@ -4,10 +4,9 @@ class Quote extends CI_Controller{
         $quotes = array(
             'Hành trình vạn dặm bắt đầu bằng một bước chân',
             'Kẻ thù lớn nhất của đời người là chính mình',
-            'Không biết tiếng Anh thời nay cũng giống không biết chữ thời xưa',
-            'Học cũng như đun nước, không duy trì lửa, nước nguội ngay',
-            'Giải trí hay học? Bạn có chiến thắng được bản thân?',
-            'Bạn muốn mình như thế nào 10 năm sau?'
+            'Vạn sự khởi đầu nan',
+            'Muốn giỏi phải học',
+            'Đường xa tới đâu, đi hoài sẽ đến'
         );
         
         $quote = $quotes[rand(0, count($quotes) -1)];

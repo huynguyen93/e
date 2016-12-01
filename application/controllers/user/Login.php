@@ -35,13 +35,13 @@ class Login extends MY_Controller{
         $this->form_validation->set_rules('email', 'Email', 'trim|strip_tags|required|valid_email|max_length[50]');
         $this->form_validation->set_rules('password', 'Password', 'trim|strip_tags|required|max_length[30]');
         
-        //inputs are not valid:
+        //if inputs are not valid:
         if($this->form_validation->run() == false) {
             $this->session->set_flashdata('error', validation_errors('<p class="alert alert-danger">', '</p>'));
             redirect('user/login');
         }
         
-        //inputs are valid, check if the email is true:
+        //inputs are valid, check the email:
         $email = $this->input->post('email');
         $cond = array();
         $cond['select'] = 'email, salt';
@@ -78,6 +78,8 @@ class Login extends MY_Controller{
             }
             
             unset($_SESSION['flash']);
+            //if user forgot to login before doing exercise, save the post data in a session variable, next step is in Stats Controller/Update Acion
+            if(isset($_SESSION['post_data'])) redirect('user/stats/update');
             redirect($this->back);
         }
         

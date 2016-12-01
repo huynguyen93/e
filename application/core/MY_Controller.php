@@ -11,6 +11,11 @@ class MY_Controller extends CI_Controller{
         $action = strtolower($this->uri->rsegment(2));
         
         if($who == 'user'){
+            // when user forgot to login before doing exercise, save the post data into a session, next step is in Login controller, when login successfully
+            if(!isset($_SESSION['user_id']) && isset($_POST['save_progress_btn'])){
+                $_SESSION['post_data'] = $_POST;
+            }
+            
             //users who's not logged in can only access to login, register, reset_password pages.
             $pages = array('login', 'register', 'reset_password');
             

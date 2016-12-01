@@ -1,6 +1,6 @@
 
 <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-<script>tinymce.init({ selector:'textarea#tinymce', menubar: false });</script>
+<script>tinymce.init({ selector:'textarea#tinymce', menubar: false, plugins: "link" });</script>
 
 <div class="row">
     <div class="col-md-8">
