@@ -2,14 +2,14 @@
 class Lessons extends MY_Controller{
     function __construct(){
         parent::__construct();
-        $this->load->model('category_model');
+        $this->load->model('Category_model');
         $this->load->model('lesson_model');
     }
     
     function index(){
         //get category list:
         $cond = array('where' => 'status=1');
-        $categories = $this->category_model->get_list($cond);
+        $categories = $this->Category_model->get_list($cond);
         
         $_SESSION['back'] = current_url();
         $this->data['categories'] = $categories;
@@ -24,7 +24,7 @@ class Lessons extends MY_Controller{
         $cat_slug = $this->uri->rsegment(3);
         
         //get category info
-        $category = $this->category_model->get_single('slug', $cat_slug);
+        $category = $this->Category_model->get_single('slug', $cat_slug);
         
         //get lesson info
         $cond = array('where' => 'cat_id='.$category->id.' AND num='.$lesson_num);

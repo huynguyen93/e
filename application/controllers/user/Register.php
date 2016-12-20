@@ -38,6 +38,7 @@ class Register extends MY_Controller{
             'email' => $email,
             'password' => md5($password.$salt),
             'salt' => $salt,
+            'updated_at' => time(),
             'created_at' => time()
         );
         
@@ -55,7 +56,8 @@ class Register extends MY_Controller{
             'user_id' => $user->id,
             'user_nickname' => $user->username,
             'user_email' => $user->email,
-            'user_recent_word_count' => $user->recent_word_count
+            'user_recent_word_count' => $user->recent_word_count,
+            'user_updated_at' => $user->updated_at
         );
         $this->session->set_userdata($user_data);
         
