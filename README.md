@@ -17,10 +17,11 @@ Cài trên windows:
 Mỗi khi muốn học thì mở chương trình xampp, start apache + mysql sẽ vào được localhost/e.  
 (Nếu ở bước 3 có thêm database_password, hoặc ở bước 8 nhập database_name khác thì vào htdocs\e\application\config\database.php, kéo xuống dưới cùng để sửa lại 'username' => 'root', 'password' => '', 'database' => 'e')
 
-Linux
+Linux  
 1. Mở terminal  
-1.1 cài php: sudo apt-get install php  
-1.2 cài mysql: sudo apt-get install mysql-server (lúc cài có bắt nhập user, password, ví dụ ở đây đặt user=root, pass=root)  
+--cài php: sudo apt-get install php  
+--cài mysql: sudo apt-get install mysql-server (lúc cài có bắt nhập user, password, ví dụ ở đây đặt user=root, pass=root)  
+--cai plugin php create image: sudo apt-get install php-gd
 2. git clone https://github.com/huynguyen93/e.git  
 3. cd vào thư mục mới clone về  
 4. cd tiếp vào thư mục database file  
