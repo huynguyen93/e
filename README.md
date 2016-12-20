@@ -21,7 +21,7 @@ Linux
 1. Mở terminal  
 --cài php: sudo apt-get install php  
 --cài mysql: sudo apt-get install mysql-server (lúc cài có bắt nhập user, password, ví dụ ở đây đặt user=root, pass=root)  
---cai plugin php create image: sudo apt-get install php-gd
+--cai plugin php create image: sudo apt-get install php-gd  
 2. git clone https://github.com/huynguyen93/e.git  
 3. cd vào thư mục mới clone về  
 4. cd tiếp vào thư mục database file  
