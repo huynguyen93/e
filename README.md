@@ -35,7 +35,4 @@ php -S localhost:8000
 6. vào file e/application/config/config.php sửa dòng $config['base_url'] = 'http://localhost:8000';  
 7. vào file e/application/config/database.php kéo xuống dưới cùng kiểm tra 'username' => 'root', 'password' => 'root', 'database' => 'e' là OK  
 8. mở trình duyệt web, vào localhost:8000/ => xong  
-Mỗi khi muốn vào thì cd vào thư mục e, chạy lệnh php -S localhost:8000 là được.  
-  
-  
-Có gì nhắn tin vào flowdoc nhé
+Mỗi khi muốn vào thì cd vào thư mục e, chạy lệnh php -S localhost:8000 là được. 
